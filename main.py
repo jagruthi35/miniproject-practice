@@ -6,8 +6,8 @@ app = Flask(__name__)
 # Connection to the Azure MySQL database
 host = 'newdb.mysql.database.azure.com'
 database = 'studinfo'
-user = 'newdb1'
-password = 'Jagruthi35'
+user = 'newdb2'
+password = 'Jagruthi56'
 
 conn = mysql.connector.connect(
     host=host,
