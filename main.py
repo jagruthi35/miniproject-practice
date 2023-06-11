@@ -6,8 +6,8 @@ app = Flask(__name__)
 # Connection to the Azure MySQL database
 host = 'newdb.mysql.database.azure.com'
 database = 'studinfo'
-user = 'newdb2'
-password = 'Jagruthi56'
+user = 'newdb1'
+password = 'Jagruthi35'
 
 conn = mysql.connector.connect(
     host=host,
@@ -34,7 +34,7 @@ def submit():
 
     # Store the student details in the database
     cursor = conn.cursor()
-    insert_query = "INSERT INTO studinfo (name, email, major, phone) VALUES (%s, %s, %s, %s)"
+    insert_query = "INSERT INTO infodet (name, email, major, phone) VALUES (%s, %s, %s, %s)"
     cursor.execute(insert_query, (name, email, major, phone))
     conn.commit()
 
@@ -42,4 +42,4 @@ def submit():
     return redirect('/about')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000,debug=True)
+    app.run(debug=True)
