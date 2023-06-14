@@ -1,20 +1,15 @@
 from flask import Flask, render_template, request, redirect
-import mysql.connector
+import pymssql
 
 app = Flask(__name__)
 
-# Connection to the Azure MySQL database
-host = 'newdb.mysql.database.azure.com'
+# Connection to the Azure SQL database
+server = 'newdb1.database.windows.net'
 database = 'studinfo'
-user = 'newdb1'
+username = 'newdb1'
 password = 'Jagruthi35'
 
-conn = mysql.connector.connect(
-    host=host,
-    database=database,
-    user=user,
-    password=password
-)
+conn = pymssql.connect(server=server, database=database, user=username, password=password)
 
 @app.route('/')
 def student_form():
@@ -34,7 +29,7 @@ def submit():
 
     # Store the student details in the database
     cursor = conn.cursor()
-    insert_query = "INSERT INTO infodet (name, email, major, phone) VALUES (%s, %s, %s, %s)"
+    insert_query = "INSERT INTO infodet(name, email, major, phone) VALUES (%s, %s, %s, %s)"
     cursor.execute(insert_query, (name, email, major, phone))
     conn.commit()
 
