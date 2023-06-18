@@ -1,15 +1,15 @@
 from flask import Flask, render_template, request, redirect
 import pymssql
+from azure.identity import DefaultAzureCredential
 
 app = Flask(__name__)
 
-# Connection to the Azure SQL database
+# Connection to the Azure SQL database using managed identity
 server = 'newdb1.database.windows.net'
 database = 'studinfo'
-username = 'newdb1'
-password = 'Jagruthi35'
 
-conn = pymssql.connect(server=server, database=database, user=username, password=password)
+credential = DefaultAzureCredential()
+conn = pymssql.connect(server=server, database=database, auth=credential)
 
 @app.route('/')
 def student_form():
@@ -28,13 +28,13 @@ def submit():
     phone = request.form['phone']
 
     # Store the student details in the database
-    cursor = conn.cursor()
-    insert_query = "INSERT INTO infodet(name, email, major, phone) VALUES (%s, %s, %s, %s)"
-    cursor.execute(insert_query, (name, email, major, phone))
+    cursor = conn.cursor(as_dict=True)
+    insert_query = "INSERT INTO infodet(name, email, major, phone) VALUES (%(name)s, %(email)s, %(major)s, %(phone)s)"
+    cursor.execute(insert_query, {'name': name, 'email': email, 'major': major, 'phone': phone})
     conn.commit()
 
     # Redirect to the about page
     return redirect('/about')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0', debug=True)
