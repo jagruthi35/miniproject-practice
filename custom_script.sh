@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "yes"|sudo apt-get update
 sudo apt-get upgrade
 echo "yes"|sudo apt install python3 python3-pip
