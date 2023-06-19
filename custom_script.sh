@@ -8,8 +8,6 @@ echo "yes"|sudo apt-get install gunicorn
 echo "yes"|sudo apt install -y nginx
 echo "yes"|sudo apt-get install git
 git clone https://github.com/jagruthi35/miniproject-practice.git
-git remote add origin https://github.com/jagruthi35/miniproject-practice.git
-git pull origin main
 
 sudo touch "/etc/nginx/sites-enabled/miniproject-practice"
 file_path="/etc/nginx/sites-enabled/miniproject-practice"
