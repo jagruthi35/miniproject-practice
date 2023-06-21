@@ -48,7 +48,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "ewit35" {
   admin_username      = "azureuser"
   admin_password      = "Admin1"
   disable_password_authentication = false
-  
+  upgrade_mode = "Automatic"
   single_placement_group = true
   
   source_image_reference {
