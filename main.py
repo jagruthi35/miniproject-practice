@@ -4,9 +4,9 @@ import pymssql
 app = Flask(__name__)
 
 # Connection to the Azure SQL database
-server = 'newdb1.database.windows.net'
+server = 'newdb35.database.windows.net'
 database = 'studinfo'
-username = 'newdb1'
+username = 'newdb35'
 password = 'Jagruthi35'
 
 conn = pymssql.connect(server=server, database=database, user=username, password=password)
