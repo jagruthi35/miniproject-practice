@@ -87,6 +87,9 @@ resource "azurerm_virtual_machine_scale_set_extension" "ewitex" {
     "fileUris": ["https://sore1.blob.core.windows.net/new1/custom_script.sh"],
     "commandToExecute": "sh custom_script.sh"
   })
+  timeouts {
+    create = "2h"  
+  }
 }
     
   
