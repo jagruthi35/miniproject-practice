@@ -76,13 +76,5 @@ variable "inbound_rules" {
   ]
 }
 
-variable "local_file_path" {
-  description = "Local file path"
-  default = "/home/ubuntu/custom/custom_script.sh"
-}
 
-variable "local_file_name" {
-  description = "Local file name"
-  default = "custom_script.sh"
-}
 
