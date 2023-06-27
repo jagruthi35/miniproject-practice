@@ -1,3 +1,9 @@
+locals {
+  main_tf_checksum     = filesha256("${path.module}/terraform35/main.tf")
+  index_html_checksum  = filesha256("${path.module}/templates/index.html")
+  main_py_checksum     = filesha256("${path.module}/main.py")
+}
+
 resource "azurerm_resource_group" "practise-project35" {
   name     = "practise-project35"
   location = "eastus2" 
@@ -76,6 +82,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "ewit35" {
     }
   }
 }
+
+  
 
 resource "azurerm_virtual_machine_scale_set_extension" "ewitex" {
   name                         = "ewitex"
