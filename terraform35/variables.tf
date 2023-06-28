@@ -76,5 +76,8 @@ variable "inbound_rules" {
   ]
 }
 
+variable "previous_state_checksum" {
+  type = string
+}
 
 

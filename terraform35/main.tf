@@ -1,8 +1,3 @@
-locals {
-  main_tf_checksum     = filesha256("${path.module}/terraform35/main.tf")
-  index_html_checksum  = filesha256("${path.module}/templates/index.html")
-  main_py_checksum     = filesha256("${path.module}/main.py")
-}
 
 resource "azurerm_resource_group" "practise-project35" {
   name     = "practise-project35"
@@ -54,9 +49,14 @@ resource "azurerm_linux_virtual_machine_scale_set" "ewit35" {
   admin_username      = "azureuser"
   admin_password      = "Admin1"
   disable_password_authentication = false
-  upgrade_mode = "Automatic"
   single_placement_group = true
-  
+  upgrade_mode = "Automatic"
+
+  lifecycle {
+    create_before_destroy = true
+    prevent_destroy       = false
+  }
+
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
@@ -83,8 +83,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "ewit35" {
   }
 }
 
-  
-
 resource "azurerm_virtual_machine_scale_set_extension" "ewitex" {
   name                         = "ewitex"
   virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.ewit35.id
@@ -92,15 +90,14 @@ resource "azurerm_virtual_machine_scale_set_extension" "ewitex" {
   type                         = "CustomScript"
   type_handler_version         = "2.0"
   settings = jsonencode({
-    "fileUris": ["https://sore1.blob.core.windows.net/new1/custom_script2.sh"],
-    "commandToExecute": "sh custom_script2.sh"
+    "fileUris": ["https://sore1.blob.core.windows.net/new1/custom_script.sh"],
+    "commandToExecute": "sh custom_script.sh"
   })
   timeouts {
     create = "2h"  
   }
 }
     
-  
   resource "azurerm_monitor_autoscale_setting" "ewit35autoscale" {
     name                = "ewit35autoscale"
     resource_group_name = azurerm_resource_group.practise-project35.name
