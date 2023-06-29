@@ -51,12 +51,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "ewit35" {
   disable_password_authentication = false
   single_placement_group = true
   upgrade_mode = "Automatic"
-  lifecycle {
-    create_before_destroy = true
-    prevent_destroy       = false
-  }
-
   
+
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
