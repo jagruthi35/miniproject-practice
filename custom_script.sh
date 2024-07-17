@@ -34,3 +34,6 @@ cd miniproject-practice
 
 # Start the Flask application using Gunicorn
 gunicorn -b $private_ip_address:8000 main:app
+
+
+##
